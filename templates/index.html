@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Chapter Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Who Appears Where</h1>
+        <form method="POST">
+            <input type="text" name="character_name" placeholder="Enter character name..." required>
+            <button type="submit">Find Chapters</button>
+        </form>
+        
+        {% if character_name %}
+            <h2>Results for "{{ character_name }}"</h2>
+            {% if "Not found" in chapters %}
+                <p>No chapters found for this character.</p>
+            {% else %}
+                <ul>
+                    {% for chapter in chapters %}
+                        <li>Chapter {{ chapter }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
