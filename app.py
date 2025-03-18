@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import spacy
 import pandas as pd
+import os
 
 # Load the trained NER model
 nlp = spacy.load("Character_NER_Model")  # Adjust path if necessary
@@ -53,4 +54,5 @@ def index():
 # 🔥 Start the App
 # ================================
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))  # Get the port from Render environment or default to 5000
+    app.run(host="0.0.0.0", port=port, debug=True)
